@@ -111,18 +111,14 @@ namespace ariel {
     }
 
     // Move assignment operator
-    MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &&other)
-
-    noexcept {
-    if (this != &other) {
-    container = other.container;
-    element = std::move(other.element);
-    other.
-
-    setElementNull();
-}
-return *this;
-}
+    MagicalContainer::AscendingIterator &MagicalContainer::AscendingIterator::operator=(AscendingIterator &&other)noexcept {
+        if (this != &other) {
+            container = other.container;
+            element = std::move(other.element);
+            other.setElementNull();
+        }
+        return *this;
+    }
 
 
 }
