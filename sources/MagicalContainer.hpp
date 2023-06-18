@@ -43,61 +43,50 @@ namespace ariel {
 
         // Move assignment operator
         MagicalContainer &operator=(MagicalContainer &&other) noexcept = default;
-//
-//        class Base_Iterator {
-//        private:
-//            MagicalContainer &container;
-//            std::weak_ptr<Node> element;
-//        public:
-//            Base_Iterator(const MagicalContainer &container);
-//
-//            virtual ~Base_Iterator() = default;
-//            Base_Iterator(const Base_Iterator &other) = default;
-//            Base_Iterator(Base_Iterator &&other) = default;
-//
-//            Base_Iterator &operator=(const Base_Iterator &other) = delete;
-//            Base_Iterator &operator=(Base_Iterator &&other) = delete;
-//
-//            bool operator==(const Base_Iterator &other) const;
-//            bool operator!=(const Base_Iterator &other) const;
-//            bool operator<(const Base_Iterator &other) const;
-//            bool operator>(const Base_Iterator &other) const;
-//        };
 
-        // Ascending Base_Iterator class
-        class AscendingIterator {
-        private:
+        class Base_Iterator {
+        protected:
             MagicalContainer &container;
             std::weak_ptr<Node> element;
-
             void setElementNull();
+        public:
+            explicit Base_Iterator(MagicalContainer &container);
+
+            virtual ~Base_Iterator() = default;
+
+            Base_Iterator(const Base_Iterator &other) = default;
+            Base_Iterator(Base_Iterator &&other) = default;
+
+            Base_Iterator &operator=(const Base_Iterator &other);
+            Base_Iterator &operator=(Base_Iterator &&other) noexcept;
+
+            virtual int operator*() const = 0;
+
+            Base_Iterator &operator++();
+
+            std::weak_ptr<Node> getElement() const;
+            bool operator==(const Base_Iterator &other) const;
+            bool operator!=(const Base_Iterator &other) const;
+            bool operator<(const Base_Iterator &other) const;
+            bool operator>(const Base_Iterator &other) const;
+
+//            virtual Base_Iterator begin() const = 0;
+//
+//            virtual Base_Iterator end() const = 0;
+        };
+
+        // Ascending Base_Iterator class
+        class AscendingIterator : public Base_Iterator{
+        private:
 
         public:
             explicit AscendingIterator(MagicalContainer &cont);
 
-            AscendingIterator(const AscendingIterator &other);
+            ~AscendingIterator() override = default;
 
-            AscendingIterator(AscendingIterator &&other) noexcept = default;
+            int operator*() const override;
 
-            AscendingIterator &operator=(const AscendingIterator &other);
-
-            AscendingIterator &operator=(AscendingIterator &&other) noexcept;
-
-            ~AscendingIterator() = default;
-
-            std::weak_ptr<Node> getElement() const;
-
-            bool operator==(const AscendingIterator &other) const;
-
-            bool operator!=(const AscendingIterator &other) const;
-
-            bool operator>(const AscendingIterator &other) const;
-
-            bool operator<(const AscendingIterator &other) const;
-
-            int operator*() const;
-
-            AscendingIterator &operator++();
+//            AscendingIterator &operator++() override;
 
             AscendingIterator begin() const;
 
@@ -105,41 +94,17 @@ namespace ariel {
         };
 
         // SideCross Base_Iterator class
-        class SideCrossIterator {
+        class SideCrossIterator : public Base_Iterator{
         private:
-            MagicalContainer &container;
-            std::weak_ptr<Node> element;
-
-            void setElementNull();
 
         public:
             explicit SideCrossIterator(MagicalContainer &cont);
 
-            SideCrossIterator();
+            SideCrossIterator()=delete;
 
-            ~SideCrossIterator() = default;
+            ~SideCrossIterator() override = default;
 
-            SideCrossIterator(const SideCrossIterator &other);
-
-            SideCrossIterator(SideCrossIterator &&other) noexcept = default;
-
-            SideCrossIterator &operator=(const SideCrossIterator &other);
-
-            SideCrossIterator &operator=(SideCrossIterator &&other) noexcept;
-
-            bool operator==(const SideCrossIterator &other) const;
-
-            bool operator!=(const SideCrossIterator &other) const;
-
-            bool operator>(const SideCrossIterator &other) const;
-
-            bool operator<(const SideCrossIterator &other) const;
-
-            int operator*() const;
-
-            std::weak_ptr<Node> getElement() const;
-
-            SideCrossIterator &operator++();
+            int operator*() const override;
 
             SideCrossIterator begin() const;
 
@@ -147,39 +112,15 @@ namespace ariel {
         };
 
         // Prime Base_Iterator class
-        class PrimeIterator {
+        class PrimeIterator : public Base_Iterator{
         private:
-            MagicalContainer &container;
-            std::weak_ptr<Node> element;
-
-            void setElementNull();
 
         public:
             explicit PrimeIterator(MagicalContainer &cont);
 
-            ~PrimeIterator() = default;
+            ~PrimeIterator() override = default;
 
-            PrimeIterator(const PrimeIterator &other);
-
-            PrimeIterator(PrimeIterator &&other) noexcept = default;
-
-            PrimeIterator &operator=(const PrimeIterator &other);
-
-            PrimeIterator &operator=(PrimeIterator &&other) noexcept;
-
-            std::weak_ptr<Node> getElement() const;
-
-            bool operator==(const PrimeIterator &other) const;
-
-            bool operator!=(const PrimeIterator &other) const;
-
-            bool operator>(const PrimeIterator &other) const;
-
-            bool operator<(const PrimeIterator &other) const;
-
-            int operator*() const;
-
-            PrimeIterator &operator++();
+            int operator*() const override;
 
             PrimeIterator begin() const;
 

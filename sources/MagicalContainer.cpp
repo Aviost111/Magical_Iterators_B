@@ -64,38 +64,6 @@ namespace ariel {
         return this->elements;
     }
 
-//    int MagicalContainer::findcrosslocation(int element) const {
-//        int high = int(elements.size());
-//        int low  =1;
-//        int loc=1;
-//        if(high==1){
-//            if(elements.at(0)>element){
-//                return 1;
-//            } else{
-//                return 2;
-//            }
-//        }
-//        auto itB = elements.begin();
-//        auto itE = elements.end();
-//        itE--;
-//        while(high>low){
-//            if(*itB>element){
-//                return loc;
-//            }
-//            loc++;
-//            itB++;
-//            low++;
-//            if(*itE<element){
-//                return loc;
-//            }
-//            loc++;
-//            itE--; // Decrement itE instead of incrementing it
-//            high--;
-//        }
-//
-//        return loc;
-//    }
-
     void MagicalContainer::updateCross() {
         // Create a vector of shared pointers to the elements in the ascending list
         vector <shared_ptr<int>> asc;
@@ -122,14 +90,4 @@ namespace ariel {
             }
         }
     }
-
-//    template<typename Iterator1, typename Iterator2>
-//    bool operator==(const Iterator1& it1, const Iterator2& it2) {
-//        if (typeid(it1) != typeid(it2)) {
-//            throw std::runtime_error("Can't compare iterators of different types!");
-//        }
-//        // Perform the actual comparison between the iterators
-//        // ...
-//    }
-
 }
